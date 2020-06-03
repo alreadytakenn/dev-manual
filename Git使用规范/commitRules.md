@@ -19,8 +19,8 @@ Commit类别暂定为:
 2. TEST     测试
 3. DEBUG    修复BUG
 
- ==综上所述==, 暂定Commit规则为:    
-\[Commit 类型\]问题名 开发状态 问题编号.
+ ==综上所述==, 暂定Commit规则为(*注意中间的空格*):    
+\[Commit 类型\] 开发状态 问题编号 问题名.
 
 例如: 
 ```git commit -m "[FEAT] Working #18 打印BOM表." ```
