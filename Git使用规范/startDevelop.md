@@ -1,4 +1,4 @@
-## 如何迅速开始一次新的开发?
+## 如何进行一次规范的开发?
 
 > 更新远程代码到本地   
 
@@ -8,16 +8,19 @@
 
 > 开始开发  
 
-[Commit规则]()  
-[Bug反馈]()  
+现在你可以进行你的开发了, 要记住的是每天你都需要至少提交一次, 
+来记录你的工作进度, 也方便进行代码审核  
+[Commit规则](./commitRules.md)  
 
 > 合并commit记录  
 
+在完成了第一个功能点的开发后, 我们要将自己的Commit记录进行一次整理  
 ```
 git rebase -i origin/develop  
 # 第一次修改: 选择合并的commit记录
 # 第二次修改: 添加合并的commit message
 ```
+如果连续开发了两个功能点, 那么整理第二个功能点时, 则是rebase到第一个功能点之后
 
 > 更新远程代码到本地 
 
@@ -28,4 +31,6 @@ git pull origin develop --rebase
 
 > 提交merge request  
 
-[redmine提交merge request]()
+[redmine提交merge request]()  
+新建以合并的问题类型  
+只能手动调整状态
