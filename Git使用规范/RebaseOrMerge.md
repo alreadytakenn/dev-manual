@@ -1,11 +1,11 @@
-### 分支合并  
+## 分支合并  
 
 > 为什么要使用 rebase ?  
 
 开发过程中难以避免的会产生一些无意义的提交记录。但为了保持项目 commit 记录的整洁，  
 以便后续代码维护与审核，所以我们需要对这些 commit 记录进行整理和加以维护。  
 
-> 合并过程  
+> 怎么使用 rebase ?
 
 假设我们的 develop 分支上已经有了两次提交，初始化仓库的 Init 节点和创建了 Sales 模块的节点。  
 [初始的develop分支](./images/初始的develop分支.png)  
@@ -19,8 +19,11 @@
 当我完成 CRM 模块的相关开发后, 我需要向 origin/develop 分支发起合并请求  
 发起请求之前, 我们需要进行额外但重要的两步: 合并本地 commit 记录, 更新本地分支  
 
-##### 合并 commit 记录  
+#### 合并 commit 记录  
 
+在合并前的commit记录中可以看到, 我工作的一些细节或流程被记录下来, 
+而这些东西我们却不希望将其合并到远程仓库的分之中去  
+因此我们需要使用 ```git rebase -i``` 来合并commit记录  
 [合并前的commit记录](./images/CRM合并前的commit记录.png)  
 ![合并前的commit记录](./images/CRM合并前的commit记录.png)  
 ```
@@ -34,15 +37,16 @@ git rebase -i 974e08
 
 [rebase交互记录](./images/rebase交互修改记录.png)  
 ![rebase交互记录](./images/rebase交互修改记录.png)  
-将第二行和第三行的pick修改为 'squash' 或 's' 后保存退出  
-保存推出后 git 会要求你修改合并后的 commit message, 这里将原本的三条 commit 记录修改为一条 'CRM Module'    
+在交互模式中, Git 给出详细的参数解释  
+我们只需要将第二行和第三行的pick修改为 'squash' 或 's', 使它们与其父提交合并    
+保存退出后 git 会要求你修改合并后的 commit message, 这里将原本的三条 commit 记录修改为一条 'CRM Module'    
 [修改合并的commit message](./images/修改合并的commit message.png)  
 ![修改合并的commit message](./images/修改合并的commit message.png)  
-最后是修改后的commit记录  
+最后是修改后的commit记录, 此时我们就已经得到了一个干净的提交记录  
 [修改后的commit记录](./images/CRM合并后的commit记录.png)  
 ![修改后的commit记录](./images/CRM合并后的commit记录.png)  
 
-##### 更新本地分支  
+#### 更新本地分支  
 我们分支合并的目的是将当前开发的新功能合并到远程的开发分支中 origin/develop  
 因此我们可以执行:
 
@@ -67,10 +71,9 @@ git fetch origin develop
 [更新本地分支后](./images/更新本地分支后.png)  
 ![更新本地分支后](./images/更新本地分支后.png)  
 
-如果远程分支有了改动, 则应该能看到更新本地分支后, 远程分支的指针已经移动了位置  
 为了形成线性的commit记录, 我们应该将现在的开发分支变基到远程分支的最新的commit记录之后  
 ```
-# 注: 此处为使用交互模式  
+# 注: 此处未使用交互模式  
 git rebase origin/develop
 ```  
 
@@ -100,15 +103,28 @@ Git 在文件中自动生成了辅助修改冲突的注释
 ```
 <<<<<<< HEAD
 # 远程分支修改的代码, 禁止改动
+# 应与代码原作者进行沟通, 确保不会覆盖他人的代码
 =======
 # 这次合并中你修改的代码
 >>>>>>> Commit message
 ```
 
-> 完成上述两步之后, 即可提交一个Merge Request  
+> 提交与请求合并 
 
+完成上述两步之后, 我应该将自己的本地分支 dev/ben 提交到远程的 dev/ben 分支,  
+并提交一个合并请求, 这样审核者就能直接合并远程仓库中的 dev/ben 和 develop 分支    
 由于merge之前我们已经进行过了 commit 合并与变基.  
 所以在merge时, 我们得以最大程度的保证了不会产生冲突, 并得到了一个整洁的提交记录  
 [Merge后的提交记录](./images/Merge后的提交记录.png)  
 ![Merge后的提交记录](./images/Merge后的提交记录.png)  
 
+提交到本地的 dev/ben 分支到远程仓库的 dev/ben 时, 大概率会因为变基的原因而导致推送出错  
+
+不要慌张, 这是因为由于变基导致你的本地分支比远程分支多出一条或多条历史记录, 
+这些记录来自其他人提交到远程 develop 分支产生的记录, 当你变基到远程 develop 的新记录上时, 
+这些记录就会对你的仓库产生影响  
+但是在保证解决了变基导致的各种冲突之后, 你完全可以放心的使用 ```git push origin dev/ben -f```  
+来进行强制推送, 因为没有人会在你的分支上进行开发. 就算出错了, 你的本地仓库中也保留你的代码.  
+
+这么做的带来的部分问题是:
+1. 远程仓库不会保存你的commit记录, 一旦本地仓库丢失, 那么你将丢失你的大部分commit记录   
