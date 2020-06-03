@@ -23,4 +23,4 @@ Commit类别暂定为:
 \[Commit 类型\]问题名 开发状态 问题编号.
 
 例如: 
-```git commit -m "[FEAT]#18 Working 打印BOM表." ```
+```git commit -m "[FEAT] #18 打印BOM表 Working." ```
