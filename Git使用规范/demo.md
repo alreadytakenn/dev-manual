@@ -1,15 +1,10 @@
-## 分支合并  
-
-> 为什么要使用 rebase ?  
-
-开发过程中难以避免的会产生一些无意义的提交记录。但为了保持项目 commit 记录的整洁，  
-以便后续代码维护与审核，所以我们需要对这些 commit 记录进行整理和加以维护。  
-
-> 怎么使用 rebase ?
+# 怎么使用 rebase ?
 
 假设我们的 develop 分支上已经有了两次提交，初始化仓库的 Init 节点和创建了 Sales 模块的节点。  
 [初始的develop分支](./images/初始的develop分支.png)  
 ![初始的develop分支](./images/初始的develop分支.png)  
+
+---
 
 然后我基于 Sales Module 签出了一个新分支 dev/ben 来进行新功能 CRM 模块的开发  
 开发过程中, 我每天都提交了相关的 commit 记录, 这里假定只有三条  
@@ -18,6 +13,8 @@
 
 当我完成 CRM 模块的相关开发后, 我需要向 origin/develop 分支发起合并请求  
 发起请求之前, 我们需要进行额外但重要的两步: 合并本地 commit 记录, 更新本地分支  
+
+---
 
 #### 合并 commit 记录  
 
@@ -45,6 +42,8 @@ git rebase -i 974e08
 最后是修改后的commit记录, 此时我们就已经得到了一个干净的提交记录  
 [修改后的commit记录](./images/CRM合并后的commit记录.png)  
 ![修改后的commit记录](./images/CRM合并后的commit记录.png)  
+
+---
 
 #### 更新本地分支  
 我们分支合并的目的是将当前开发的新功能合并到远程的开发分支中 origin/develop  
@@ -84,6 +83,9 @@ git rebase origin/develop
 [变基后](./images/变基后.png)   
 ![变基后](./images/变基后.png)  
 
+---
+
+> 解决冲突  
 
 此时如果双方修改了同一文件, 那么变基则会难以避免的产生冲突   
 对于冲突, 只有在协商明确之后,才能修改远程仓库中对方的代码  
@@ -108,6 +110,17 @@ Git 在文件中自动生成了辅助修改冲突的注释
 # 这次合并中你修改的代码
 >>>>>>> Commit message
 ```
+
+
+[产生多个冲突](./images/产生多个冲突.png)  
+![产生多个冲突](./images/产生多个冲突.png)  
+
+在上面这个过程中, 有多个Commit产生了冲突, Delivery 和 CRM   
+由于rebase每次只重放一个Commit, 所以每次只能修改一个Commit中的冲突,  
+然后使用```git rebase --continue``` 来进入下一个Commit, 
+直到所有Commit都重放完成, 这次rebase才算结束.  
+
+---
 
 > 提交与请求合并 
 

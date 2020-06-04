@@ -24,7 +24,7 @@ git rebase -i origin/develop
 
 > 更新远程代码到本地 
 
-在本地开发分支上执行以下代码, 解决过程中产生的[合并冲突]()
+在本地开发分支上执行以下代码, 解决过程中产生的[合并冲突](./handleConflict.md)
 ```
 git pull origin develop --rebase
 ```
