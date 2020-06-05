@@ -14,3 +14,4 @@ class ImportInvoiceImportWizard(models.TransientModel):
 ```
 <field name="category_id" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" placeholder="Tags..."/>
 ```
+[返回首页](./README.md)

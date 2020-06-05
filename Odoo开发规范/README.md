@@ -1,9 +1,10 @@
-1. [Python代码布局](pythonCodeLayout.md)
+1. [代码布局](pythonCodeLayout.md)
     - 缩进
     - 代码行长度限制
     - 运算符前换行
     - 空白行
     - 导入
+    - [xml代码布局](./xmlCodeLayout.md)
 
 
 2. [字符串引号](./stringQuotes.md)
