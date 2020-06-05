@@ -1,4 +1,4 @@
-### Git使用规范
+### Git使用规范  
 
 
 [分支介绍](./introduceBranchs.md)  
