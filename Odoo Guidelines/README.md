@@ -37,3 +37,4 @@ Odoo Guidelines介绍了Odoo编码标准。
 - 标签和模块名
 - Git提交消息的消息头
 - Git提交消息的完整描述
+- [分支模型](./odooBranchModel.md)
