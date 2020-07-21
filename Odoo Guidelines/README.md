@@ -30,7 +30,7 @@ Odoo Guidelines介绍了Odoo编码标准。
 - Javascript编程准则
 - CSS编程准则
 
-### [GIT](./git.md)  
+### [GIT](./Git.md)  
 
 - 配置Git
 - Git提交信息的结构
