@@ -24,7 +24,7 @@ Odoo Guidelines介绍了Odoo编码标准。
 - Odoo编程准则
 - 符号和定义准则
 
-### [Javascript 和 CSS 文件](./Javascript 和 CSS.md)  
+### [Javascript 和 CSS 文件](./Javascript和CSS.md)  
 
 - 静态文件结构
 - Javascript编程准则
