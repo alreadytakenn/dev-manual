@@ -316,28 +316,3 @@ git checkout master
 git push --tags origin master
 ```
 
-
-
-```
-git fetch origin master:master          # 更新主分支
-git checkout master                     # 切换到主分支
-git checkout -b hotfix                  # 签出热修分支
-
-# 修复紧急bug
-git add .
-git commit -am '[FIX] crm_extend: Some messages'
-
-[可选] git rebase -i develop 
-############################################
-# 清理合并不相关的提交记录
-############################################
-
-# 合并到生产分支
-git checkout master
-git cherry-pick hotfix-1.0.1
-
-# 合并到开发分支
-git checkout develop
-git cherrt-pick -x $start_commit_id ^.. $end_commit_id
-
-```
